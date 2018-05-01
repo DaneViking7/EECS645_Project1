@@ -1,5 +1,5 @@
 //*****************************************************************************
-//--ALUSimulator.cpp
+//--ALUSimulator.h
 //
 //		Authors: 		Natalie LaLuzerne, Niels Hansen
 //		Organization:	KU/EECS/EECS 645
