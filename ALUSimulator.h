@@ -27,7 +27,7 @@ public:
 				uint32_t ImmediateValue,
 				uint32_t* Status );
 private:
-	uint32_ t = mAnswer;
+	uint32_t mAnswer;
 };
 
 #endif

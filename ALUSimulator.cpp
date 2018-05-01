@@ -30,17 +30,17 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
         {
             // NOOP/SLL
             case 0x00:
-                mAnswer = Rt << ShiftAmt;
+                mAnswer = static_cast<unsigned>(Rt) << ShiftAmt;
             break;
 
             // SRL
             case 0X02:
-                mAnswer = Rt >> ShiftAmt;
+                mAnswer = static_cast<unsigned>(Rt) >> ShiftAmt;
             break;
 
             // SRA
             case 0x03:
-                mAnswer = Rt >> ShiftAmt;
+                mAnswer = static_cast<unsigned>(Rt) >> ShiftAmt;
             break;
 
             // SLLV
@@ -70,7 +70,7 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
 
             // MULTU
             case 0x19:
-                mAnswer = Rt * Rs;
+                mAnswer = static_cast<unsigned>(Rt) * static_cast<unsigned>(Rs);
             break;
 
             //DIV
@@ -81,7 +81,7 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
 
             // DIVU
             case 0x1B:
-                mAnswer = Rt / Rs;
+                mAnswer = static_cast<unsigned>(Rt) / static_cast<unsigned>(Rs);
 
             break;
 
@@ -92,42 +92,56 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
 
             // ADDU
             case 0x21:
-
+                mAnswer = static_cast<unsigned>(Rt) + static_cast<unsigned>(Rs);
             break;
 
             // SUB
             case 0x22:
-
+                mAnswer = Rt - Rs;
             break;
 
             // SUBU
             case 0x23:
-
+                mAnswer = static_cast<unsigned>(Rt) - static_cast<unsigned>(Rs);
             break;
 
             // AND
             case 0x24:
-
+                mAnswer = Rt & Rs;
             break;
 
             // OR
             case 0x25:
-
+                mAnswer = Rt | Rs;
             break;
 
             // XOR
             case 0x26:
-
+                mAnswer = Rt ^ Rs;
             break;
 
             // SLT
             case 0x2A:
-
+                if (Rt < Rs)
+                {
+                    mAnswer = 1;
+                }
+                else
+                {
+                    mAnswer = 0;
+                }
             break;
 
             // SLTU
             case 0x2B:
-
+                if (static_cast<unsigned>(Rt) < static_cast<unsigned>(Rs))
+                {
+                    mAnswer = 1;
+                }
+                else
+                {
+                    mAnswer = 0;
+                }
             break;
 
             default:
@@ -142,21 +156,36 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
         {
             // ADDI
             case 0x08:
-
+                mAnswer = Rt + ImmediateValue;
             break;
 
             // ADDIU
             case 0x09:
-
+                mAnswer = static_cast<unsigned>(Rt) + static_cast<unsigned>(ImmediateValue);
             break;
 
             // SLTI
             case 0x0A:
-
+                if (Rt < ImmediateValue)
+                {
+                    mAnswer = 1;
+                }
+                else
+                {
+                    mAnswer = 0;
+                }
             break;
 
+            // SLTIU
             case 0x0B:
-
+                if (static_cast<unsigned>(Rt) < static_cast<unsigned>(ImmediateValue))
+                {
+                    mAnswer = 1;
+                }
+                else
+                {
+                    mAnswer = 0;
+                }
             break;
 
             default:
