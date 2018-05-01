@@ -24,6 +24,7 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
     mAnswer = 0;
     sVal = 0;
     tVal = 0;
+    specialWrite = false;
 
     //Read the register
     RegisterFile_Read(theRegisterFile, Rs, &sVal, Rt, &tVal);
@@ -67,14 +68,16 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
 
             // MULT
             case 0x18:
-                mAnswer = sVal * tVal; 
+                mAnswer = sVal * tVal;
+                specialWrite = true; 
                 // Need to write result of instruction to HI and LO registers
                 RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
                 RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
 
             // MULTU
             case 0x19:
-                mAnswer = sVal * tVal; 
+                mAnswer = sVal * tVal;
+                specialWrite = true; 
                 // Need to write result of instruction to HI and LO registers
                 RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
                 RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
@@ -82,6 +85,7 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
             // DIV
             case 0x1A:
                 mAnswer = sVal / tVal;
+                specialWrite = true;
                 // Need to write result of instruction to HI and LO registers
                 RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
                 RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
@@ -89,6 +93,7 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
             // DIVU
             case 0x1B:
                 mAnswer = sVal / tVal;
+                specialWrite = true;
                 // Need to write result of instruction to HI and LO registers
                 RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
                 RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
@@ -135,7 +140,7 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
         }
 
         // Write result of instruction to the register file
-        RegisterFile_Write(theRegisterFile, true, Rd, mAnswer);
+        if (!specialWrite) { RegisterFile_Write(theRegisterFile, true, Rd, mAnswer); }
 	}
     // I Instructions
 	else

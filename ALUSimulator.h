@@ -30,6 +30,7 @@ private:
 	uint32_t mAnswer; //variable which will temporarily store the result of an instruction
 	uint32_t sVal; //variable which will temporarily store the Rs value from the register file
 	uint32_t tVal; //variable which will temporarily store the Rt value from the register file
+	bool specialWrite; //variable which indicates whether a special or regular write takes place
 };
 
 #endif
