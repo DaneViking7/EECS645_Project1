@@ -67,19 +67,31 @@ ALUSimulator::ALUSimulator( RegisterFile theRegisterFile,
 
             // MULT
             case 0x18:
-                mAnswer = sVal * tVal; break;
+                mAnswer = sVal * tVal; 
+                // Need to write result of instruction to HI and LO registers
+                RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
+                RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
 
             // MULTU
             case 0x19:
-                mAnswer = sVal * tVal; break;
+                mAnswer = sVal * tVal; 
+                // Need to write result of instruction to HI and LO registers
+                RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
+                RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
 
             // DIV
             case 0x1A:
-                mAnswer = sVal / tVal; break;
+                mAnswer = sVal / tVal;
+                // Need to write result of instruction to HI and LO registers
+                RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
+                RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
 
             // DIVU
             case 0x1B:
-                mAnswer = sVal / tVal; break;
+                mAnswer = sVal / tVal;
+                // Need to write result of instruction to HI and LO registers
+                RegisterFile_Write(theRegisterFile, true, 0x1F, mAnswer);
+                RegisterFile_Write(theRegisterFile, true, 0x1E, mAnswer); break;
 
             // ADD
             case 0x20:
