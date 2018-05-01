@@ -14,6 +14,14 @@
 #ifndef ALUSIMULATOR_H
 #define ALUSIMULATOR_H
 
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdarg.h>
+
+#include <stdio.h>
+#include <iostream>
+
 #include "RegisterFile_01.h"
 
 class ALUSimulator
