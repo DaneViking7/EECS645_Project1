@@ -14,14 +14,6 @@
 #ifndef ALUSIMULATOR_H
 #define ALUSIMULATOR_H
 
-#include <stddef.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdarg.h>
-
-#include <stdio.h>
-#include <iostream>
-
 #include "RegisterFile_01.h"
 
 class ALUSimulator
@@ -35,7 +27,9 @@ public:
 				uint32_t ImmediateValue,
 				uint32_t* Status );
 private:
-	uint32_t mAnswer;
+	uint32_t mAnswer; //variable which will temporarily store the result of an instruction
+	uint32_t sVal; //variable which will temporarily store the Rs value from the register file
+	uint32_t tVal; //variable which will temporarily store the Rt value from the register file
 };
 
 #endif
